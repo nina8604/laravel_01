@@ -6,6 +6,8 @@ services:
       context: .
       dockerfile: ./docker/php-fpm/Dockerfile
     image: php
+    depends_on:
+      - db
     user: '1000:1000'
     container_name: '${DOCKER_PREFIX}-php'
     restart: unless-stopped
@@ -30,7 +32,33 @@ services:
     networks:
       - app-network
 
+  # Mysql Service
+  db:
+    image: mysql:5.7
+    container_name: "${DOCKER_PREFIX}-db"
+    restart: unless-stopped
+    tty: true
+    command:
+      --default-authentication-plugin=mysql_native_password
+      --performance-schema --secure-file-priv=""
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - dbdata:/var/lib/mysql/
+    networks:
+      - app-network
+
 #Docker Networks
 networks:
   app-network:
     driver: bridge
+
+#Voluems
+volumes:
+  dbdata:
+    driver: local

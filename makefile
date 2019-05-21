@@ -1,5 +1,5 @@
 php = php
-
+db=db
 change_owner: #
 	@sudo chown -R $(USER):$(USER) $(CURDIR)
 
@@ -18,3 +18,9 @@ show: #show docker's containers
 
 connect_php: #Connect
 	@sudo docker-compose exec $(php) bash
+
+connect_db: #Connect
+	@sudo docker-compose exec $(db) bash
+
+fresh: #Connect
+	@sudo docker-compose exec $(db) bash
