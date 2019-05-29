@@ -12,7 +12,7 @@ start: #start docker container
 stop: #stop docker container
 	@sudo docker-compose down
 
-composer_dump: autoload seed
+composer_dump: # autoload seed
 	@sudo docker-compose exec $(php) composer dump-autoload
 
 #create_seeder: #Create seeder and autoload seed - I variant
@@ -20,9 +20,9 @@ composer_dump: autoload seed
 
 create_seeder: seeder composer_dump #Create seeder and autoload seed - II variant
 	@echo "Seeder created"
-	
+
 seeder: #Create seeder
-	@sudo docker-compose exec $(php) php artisan make:seeder $('name')TableSeeder
+	@sudo docker-compose exec $(php) php artisan make:seeder $(name)TableSeeder
 
 show: #show docker's containers
 	@sudo docker ps
