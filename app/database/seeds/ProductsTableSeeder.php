@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Faker\Generator as Faker;
+use Illuminate\Support\Facades\DB;
 
 class ProductsTableSeeder extends Seeder
 {
@@ -9,17 +11,16 @@ class ProductsTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(Faker $faker)
     {
-    	for($i = 1; $i < 7; $i++){
-			\DB::table('products')->insert([
-				'sku' => random_int(1,1024),
-				'name' => 'name #'.$i,
-				'cat_id' => $i,
-				'description' => 'description #'.$i,
-				'price' => random_int(1,7)*11.52,
-				'stock' => random_int(1,26),
-				'image' => 'image #'.$i,
+    	for($i = 1; $i < 100; $i++){
+			DB::table('products')->insert([
+				'name' => join( '', $faker->words(4)),
+				'price' => $faker->randomFloat(2,10,200),
+				'description' => $faker-> sentence(),
+				'amount' => $faker-> numberBetween(0,1000),
+				'created_at' => now(),
+				'updated_at' => now(),
 			]);
 		}
     }
