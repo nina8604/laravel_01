@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
 			$table->string('name');
 			$table->Integer ('cat_id')->unsigned();
 			$table->text('description')->nullable();
-			$table->float('price');
+			$table->float('price', 8, 2 );
 			$table->Integer('stock');
 			$table->string('image');
 
