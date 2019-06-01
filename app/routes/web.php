@@ -14,6 +14,23 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/cart/user/{user_id}', function ($user_id) {
+	dd(DB::table('carts')->select([
+		'user_id',
+		'u.name as u_name',
+		'p.name as p_name',
+		'price',
+		'description',
+		'amount',
+		'p.created_at as P_created_at',
+		'p.updated_at as p_updated_at'
+	])->where('user_id',$user_id)->join('products as p','carts.product_id','=','p.id')->join
+	('users as u','carts.user_id','=','u.id')->get()
+	);
+});
+
+
 //Route::get('/about',function(){
 //	return "About";
 //})->name('about');
@@ -39,10 +56,10 @@ Route::get('/', function () {
 //Route::resource('/products','ProductsController');
 //Route::resource('/articles','ArticlesController');
 
-Route::resources([
-	'/products'=>'ProductsController',
-	'/articles'=>'ArticlesController',
-]);
+//Route::resources([
+//	'/products'=>'ProductsController',
+//	'/articles'=>'ArticlesController',
+//]);
 //Route::get('/catalog',function(){
 //
 //	$products_array=[

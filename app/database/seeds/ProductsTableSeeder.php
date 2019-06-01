@@ -13,7 +13,7 @@ class ProductsTableSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-    	for($i = 1; $i < 100; $i++){
+    	for($i = 1; $i < 200; $i++){
 			DB::table('products')->insert([
 				'name' => join( '', $faker->words(4)),
 				'price' => $faker->randomFloat(2,10,200),
