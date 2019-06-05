@@ -11,9 +11,19 @@
 |
 */
 
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.home');
 });
+
+//Route::get('/login', function(){
+//	return "Login";
+//})->name('login');
+
+
 
 Route::get('/cart/user/{user_id}', function ($user_id) {
 	dd(DB::table('carts')->select([
