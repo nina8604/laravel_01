@@ -19,26 +19,30 @@ Route::get('/', function () {
     return view('pages.home');
 })->name('home');
 
+Route::get('/users', function () {
+    return view('users.index');
+})->name('users');
+
 //Route::get('/login', function(){
 //	return "Login";
 //})->name('login');
 
 
 
-Route::get('/cart/user/{user_id}', function ($user_id) {
-	dd(DB::table('carts')->select([
-		'user_id',
-		'u.name as u_name',
-		'p.name as p_name',
-		'price',
-		'description',
-		'amount',
-		'p.created_at as P_created_at',
-		'p.updated_at as p_updated_at'
-	])->where('user_id',$user_id)->join('products as p','carts.product_id','=','p.id')->join
-	('users as u','carts.user_id','=','u.id')->get()
-	);
-});
+//Route::get('/cart/user/{user_id}', function ($user_id) {
+//	dd(DB::table('carts')->select([
+//		'user_id',
+//		'u.name as u_name',
+//		'p.name as p_name',
+//		'price',
+//		'description',
+//		'amount',
+//		'p.created_at as P_created_at',
+//		'p.updated_at as p_updated_at'
+//	])->where('user_id',$user_id)->join('products as p','carts.product_id','=','p.id')->join
+//	('users as u','carts.user_id','=','u.id')->get()
+//	);
+//});
 
 
 //Route::get('/about',function(){
