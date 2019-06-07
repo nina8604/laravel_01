@@ -19,9 +19,10 @@ Route::get('/', function () {
     return view('pages.home');
 })->name('home');
 
-Route::get('/users', function () {
-    return view('users.index');
-})->name('users');
+Route::group([ 'prefix' => 'users', 'as' => 'users.' ], function(){
+	Route::get('/', 'usersController@index')->name('index');
+	Route::get('/{user}', 'usersController@show')->name('show');
+});
 
 //Route::get('/login', function(){
 //	return "Login";

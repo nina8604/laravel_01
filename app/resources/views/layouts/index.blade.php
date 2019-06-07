@@ -13,7 +13,11 @@
 
 	@include('layouts.header')
 
-	@yield('content')
+	<div class="container">
+		<div class="row">
+			@yield('content')
+		</div>
+	</div>
 
 	@section('javascript')
 		<script src="{{asset('js/app.js')}}"></script>
