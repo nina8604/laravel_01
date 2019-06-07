@@ -20,11 +20,21 @@ class usersController extends Controller
 //		])->where('user_id',$user_id)->join('products as p','carts.product_id','=','p.id')->join
 //		('users as u','carts.user_id','=','u.id')->get()
 //		);
-		$users = DB::table('users')->get();
-		return view('users.index', ['users' => $users]);
+//		$users = DB::table('users')->get();
+//		return view('users.index', ['users' => $users]);
+		return view('users.index', [
+			'users' => DB::table('users')->get()
+		]);
 	}
-	public function show(){
-
+	public function show(int $id){
+//		$user = DB::table('users')->find($id);
+//		if (!$user) abort(404);
+//		return view('users.show',[
+//			'user' => $user,
+//		]);
+		return view('users.show',[
+			'user' => ($user = DB::table('users')->find($id))?$user: abort(404)
+		]);
 	}
 
 }
