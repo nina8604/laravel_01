@@ -3,7 +3,20 @@
 {{--{!! dump($users) !!}--}}
 
 @section('content')
-    <div class="col">
+    <div class="col-12">
+        <form class="form-inline">
+
+                <div class="col-sm-10 my-1 d-flex">
+                    <label class="mr-2" for="inlineFormInputName">Name</label>
+                    <input name="search" type="text" class="form-control" id="inlineFormInputName" placeholder="Enter search name">
+                </div>
+                <div class="col-auto my-1">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+
+        </form>
+    </div>
+    <div class="col-12">
         <table class="table">
             <thead>
                 <tr>

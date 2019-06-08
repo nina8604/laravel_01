@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Traits\Searchable;
 
 class usersController extends Controller
 {
-    public function index(){
+	use Searchable;
+    public function index(Request $request){
 //		dd(DB::table('carts')->select([
 //			'user_id',
 //			'u.name as u_name',
@@ -22,8 +24,13 @@ class usersController extends Controller
 //		);
 //		$users = DB::table('users')->get();
 //		return view('users.index', ['users' => $users]);
+//		$query = DB::table('users');
+//		if ($request->has('search')){
+//			$query->whereName($request->search);
+//		}
+
 		return view('users.index', [
-			'users' => DB::table('users')->get()
+			'users' => $this->search(DB::table('users'), $request)->get()
 		]);
 	}
 	public function show(int $id){
